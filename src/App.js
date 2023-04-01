@@ -4,31 +4,17 @@ import styles from './styles.module.css'
 
 import Articles from "./Articles";
 import SearchBar from "./SearchBar";
-import Comments from "./Comments"
 import Filter from "./Filter"
 import NavBar from "./NavBar"
 import Pagination from "./Pagination"
-import Settings from "./Settings"
 
 
 function App() {
   
-  useEffect(() => {
-    
-    axios.get('http://hn.algolia.com/api/v1/items/10')
-    //Step2: Grab the response from the api and store it
-    .then(res => {
-      const theData = res.data
-      console.log(theData)
-    })
-  },[])
-
   return (
     <div>
       <NavBar />
       <Filter />
-      <Articles />
-      <Pagination />
     </div>
   );
 }
@@ -54,3 +40,7 @@ export default App;
   // A component for the page when you click on Settings
   // A component for the page when you click on a user/author
   // A component for the page when you click
+
+
+//To search by Author:
+  // http://hn.algolia.com/api/v1/users/:username

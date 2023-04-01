@@ -1,63 +1,71 @@
-import React, {useState} from 'react';
-
-
+import React, {useState} from 'react'
 import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import SearchBar from './SearchBar';
 
+function Filter(props) {
+    const [searchBy,setSearchBy] = useState("story")
+    const [orderBy,setOrderBy] = useState('byPopularity')
+    const [from,setFrom] = useState('last24h')
 
-function Filter() {
-    const [filter, setFilter] = useState()
+    const handleSelectSearch =(e) => {
+        console.log(e)
+        setSearchBy(e)
+    }
+
+    const handleSelectOrder =(e) => {
+        console.log(e)
+        setOrderBy(e)
+    }
+
+    const handleSelectFrom =(e) => {
+        console.log(e)
+        setFrom(e)
+    }
 
   return (
     <div>
-        Search
-        <Dropdown>
-        <Dropdown.Toggle variant="primary" id="dropdown-basic">
-            Type
-        </Dropdown.Toggle>
+        <SearchBar 
+        orderBy={orderBy}
+        from={from}
+        searchBy={searchBy}
+        />
 
-        <Dropdown.Menu>
-            <Dropdown.Item href="#/action-1">All</Dropdown.Item>
-            <Dropdown.Item href="#/action-2">Stories</Dropdown.Item>
-            <Dropdown.Item href="#/action-3">Comments</Dropdown.Item>
-        </Dropdown.Menu>
-        </Dropdown>
+        Search by:
+        <DropdownButton data={searchBy} id="dropdown-basic-button" title={searchBy} onSelect={handleSelectSearch}>
+            <Dropdown.Item eventKey="all">All</Dropdown.Item>
+            <Dropdown.Item eventKey="story">Stories</Dropdown.Item>
+            <Dropdown.Item eventKey="comment">Comments</Dropdown.Item>
+        </DropdownButton>
 
-        by
-        <Dropdown>
-        <Dropdown.Toggle variant="success" id="dropdown-basic">
-            Order
-        </Dropdown.Toggle>
+        Order:
+        <DropdownButton data={orderBy} id="dropdown-basic-button" title={orderBy} onSelect={handleSelectOrder}>
+            <Dropdown.Item eventKey="byPopularity">Popularity</Dropdown.Item>
+            <Dropdown.Item eventKey="byDate">Date</Dropdown.Item>
 
-        <Dropdown.Menu>
-            <Dropdown.Item href="#/action-1">Date</Dropdown.Item>
-            <Dropdown.Item href="#/action-2">Popularity</Dropdown.Item>
-        </Dropdown.Menu>
-        </Dropdown>
+        </DropdownButton>
 
-        for
-        <Dropdown>
-        <Dropdown.Toggle variant="warning" id="dropdown-basic">
-            Time-frame
-        </Dropdown.Toggle>
-
-        <Dropdown.Menu>
-            <Dropdown.Item href="#/action-1">All time</Dropdown.Item>
-            <Dropdown.Item href="#/action-2">Last 24h</Dropdown.Item>
-            <Dropdown.Item href="#/action-3">Past Week</Dropdown.Item>
-            <Dropdown.Item href="#/action-4">Past Month</Dropdown.Item>
-            <Dropdown.Item href="#/action-5">Past Year</Dropdown.Item>
-            <Dropdown.Item href="#/action-6">Custom Time</Dropdown.Item>
-        </Dropdown.Menu>
-        </Dropdown>
-
+        From:
+        <DropdownButton data={from} id="dropdown-basic-button" title={from} onSelect={handleSelectFrom}>
+            <Dropdown.Item eventKey="all">All time</Dropdown.Item>
+            <Dropdown.Item eventKey="last24h">Last 24h</Dropdown.Item>
+            <Dropdown.Item eventKey="pastWeek">Past Week</Dropdown.Item>
+            <Dropdown.Item eventKey="pastMonth">Past Month</Dropdown.Item>
+            <Dropdown.Item eventKey="pastYear">Past Year</Dropdown.Item>
+        </DropdownButton>
     </div>
   );
 }
 
 export default Filter;
 
-//Problems:
-    //1. I want the dropdown button to display what the user is filtering. So if their wanting to look at only comments the button should say they're on comments.
-        //Possible Solution: 
-        //1a. Have different states for each of the filtering buttons and update that state to display whatever the user is on.
-        //1b. Have the content of the button be a prop.
+
+
+//tags:
+    //For story,comment,or polls
+    //For Author: author_
+    //
+
+//numericFilters:
+    //created_at_i: <=
+    //
